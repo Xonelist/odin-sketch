@@ -1,0 +1,1 @@
+this project purpose is to make interactive html, that act like etch-a-sketch by using javascript.
