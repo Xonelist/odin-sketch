@@ -35,8 +35,8 @@ function createArea() {
 
 function reset() {
     sizeSquare = Number(prompt("change amount of square each side ? (max = 100)", 16 ))
-    if (sizeSquare > 100){
-        alert("The number you input is too much");
+    if (sizeSquare > 100 || isNaN(sizeSquare)){
+        alert("The number you input is too much or not a number");
         return false;
     }
     bodyHTML.removeChild(bodyHTML.firstChild);
