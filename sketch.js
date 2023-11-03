@@ -16,7 +16,7 @@ function makeTemplate(){
     div.style.height = "720px"
     div.style.margin = "0 auto"
     div.style.border = "10px solid black"
-    div.style.background = "white";
+    div.style.backgroundColor = "rgb(255, 255, 255)";
     bodyHTML.insertBefore(div, bodyHTML.firstChild);
     createArea();
 }
@@ -26,6 +26,7 @@ function createArea() {
     for (i = 1; i <= (sizeSquare*sizeSquare); i++) {
         const areaDiv = document.createElement("div");
         areaDiv.id = "template";
+        areaDiv.style.backgroundColor = "rgb(255, 255, 255)"
         areaDiv.style.width = "100%"
         areaDiv.style.height = "100%"
         div.appendChild(areaDiv);
@@ -35,7 +36,7 @@ function createArea() {
 
 function reset() {
     sizeSquare = Number(prompt("change amount of square each side ? (max = 100)", 16 ))
-    if (sizeSquare > 100 || isNaN(sizeSquare)){
+    if (sizeSquare > 100 || isNaN(sizeSquare)) {
         alert("The number you input is too much or not a number");
         return false;
     }
@@ -43,10 +44,22 @@ function reset() {
     makeTemplate();
 }
 
+function addColorInt(bgc) {
+    let rgb = getComputedStyle(bgc.target).backgroundColor.replace(/[^\d,.]/g, '').split(',');
+    rgb = rgb.map(color => {
+        return color = Number(color) - 10;
+    });
+    return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
+}
+
 document.body.addEventListener("mouseover", (e) => {
     if (e.target.id === "template")
-        e.target.style.background = "gray";
+        e.target.style.backgroundColor = addColorInt(e);
 })
+
+document.body.addEventListener("click", (e) => {
+    console.log(getComputedStyle(e.target).background)
+ })
 
 makeTemplate();
 btn.addEventListener("click", () => reset())
